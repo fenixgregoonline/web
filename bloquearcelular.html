@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Acesso Restrito</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #fff;
+    }
+
+    /* POP-UP fundo escuro */
+    #popup-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.4);
+        z-index: 9999;
+    }
+
+    /* POP-UP caixa branca */
+    #popup-box {
+        width: 350px;
+        background: #fff;
+        padding: 25px;
+        border-radius: 10px;
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    /* Ícone X vermelho */
+    .popup-icon {
+        font-size: 60px;
+        color: #ff4d4d;
+    }
+
+    /* Título */
+    .popup-title {
+        font-size: 28px;
+        font-weight: bold;
+        margin-top: 15px;
+    }
+
+    /* Texto */
+    .popup-msg {
+        font-size: 18px;
+        margin: 15px 0;
+    }
+
+    /* Botão azul */
+    .popup-btn {
+        padding: 10px 25px;
+        font-size: 16px;
+        background: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    /* Conteúdo normal */
+    #conteudo {
+        display: none;
+        text-align: center;
+        padding-top: 50px;
+    }
+</style>
+
+
+<script>
+    window.onload = function () {
+        var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone/i.test(navigator.userAgent);
+
+        if (isMobile) {
+
+            // Exibe pop-up
+            document.getElementById("popup-overlay").style.display = "block";
+
+            // Remove o conteúdo da página
+            document.body.style.background = "#fff";
+            document.getElementById("conteudo").style.display = "none";
+
+        } else {
+            // Libera conteúdo no computador
+            document.getElementById("conteudo").style.display = "block";
+        }
+    }
+
+    function fecharPopup() {
+        // Fecha pop-up e deixa página em branco (celular)
+        document.getElementById("popup-overlay").style.display = "none";
+        document.body.innerHTML = "";
+    }
+</script>
+
+</head>
+<body>
+
+<!-- POP-UP -->
+<div id="popup-overlay">
+    <div id="popup-box">
+        <div class="popup-icon">?</div>
+        <div class="popup-title">Opss!</div>
+        <div class="popup-msg">Este site só pode ser acessado no computador!</div>
+        <button class="popup-btn" onclick="fecharPopup()">OK</button>
+    </div>
+</div>
+
+<!-- CONTEÚDO PARA PC -->
+<div id="conteudo">
+    <h1>Bem-vindo ao site</h1>
+    <p>Este conteúdo só aparece no computador.</p>
+
+    <button onclick="window.location.href='pagina2.html'">
+        Abrir outra página
+    </button>
+</div>
+
+</body>
+</html>
